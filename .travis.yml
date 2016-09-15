@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: Ma5a6fLJysz870sHu+e7lkz+xl+jAsP2Ddu6NuCitHiq+XB9IRJNm8AfaJ4NQnclpiLy120vHr2pOi0/2v5m5YKyVta/ZoMtYNxvE6GHwe+qyKegofrPc9wovkhLtR0Efvb8vioEYfThCb2BO2ssA32lNGJ7nKcQ1JNHeyIRuPVyMvmFNOM6+x4+nez09uKav19Mu81QzZ8wMnBDZxcNCOhJzuFb0f0DOPA9TYy/CyZb4NqVPX+6EMtfyM828F3WDmHcUFNCDp2Mh+IvoxwwtBciwnAXPf1tB2RxwS9leecZ7uKsPVSarPsuOCu1ktYy7ub8+YuxuZbijaLU7H6v+SZTsP5K7xVD/i+eS4OUsoAfbUMjb8TRL3pU4vlMcCYuhK1PJZSKrX80xeh+TCHjTu5080Oe/O0JpqnJDU23+/7egp/arBV06QLQJJmaed0HeMZyVQKRrdkFgQz3u3egWuLQs77dGsGuAMGX51Wfo/xiS2Dhm3qTpD5aVN6keryHOFrk6iwTdgY3HLUvomEyRmVZJ5rcuJ4beJ9u1cRLDNxr30DzVk2fpARz+GHESnAdKbKLrSZovVj9TokPFDRelLYKoGFvPncjGshOadUA55Dl+YIUyI8FbyyrMHhNc4DnRNV9ihmM7NexRrilz0hsP6fKntO5fOu7oGRxPProLeM=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/The-Golden-Bough-A-Study-of-Magic-and-Religion_3623
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
