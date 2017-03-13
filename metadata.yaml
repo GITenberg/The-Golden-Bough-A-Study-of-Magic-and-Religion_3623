@@ -1,5 +1,8 @@
 _repo: The-Golden-Bough-A-Study-of-Magic-and-Religion_3623
-_version: 0.1.0
+_version: 0.2.0
+covers:
+- cover_type: generated
+  image_path: cover.png
 creator:
   author:
     agent_name: Frazer, James George
@@ -20,6 +23,8 @@ description: "The Golden Bough: A Study in Comparative Religion (retitled The Go
   \ as told in such publications as Thomas Bulfinch's The Age of Fable, or Stories\
   \ of Gods and Heroes (1855). The influence of The Golden Bough on contemporary European\
   \ literature and thought was substantial.\n From Wikipedia (CC BY-SA)."
+edition_identifiers:
+  edition_id: http://www.gutenberg.org/ebooks/3623#The-Golden-Bough-A-Study-of-Magic-and-Religion
 gutenberg_bookshelf:
 - Anthropology
 - Mythology
