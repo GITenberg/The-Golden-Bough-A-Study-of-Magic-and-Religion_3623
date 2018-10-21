@@ -1,5 +1,5 @@
 _repo: The-Golden-Bough-A-Study-of-Magic-and-Religion_3623
-_version: 0.2.0
+_version: 0.2.1
 covers:
 - cover_type: generated
   image_path: cover.png
@@ -44,6 +44,7 @@ subjects:
 - !lcc 'BL'
 - !lcsh 'Magic'
 - !lcsh 'Religion'
+- GITenberg
 title: 'The Golden Bough: A Study of Magic and Religion'
 url: http://www.gutenberg.org/ebooks/3623
 wikipedia:
